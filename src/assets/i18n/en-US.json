@@ -1,0 +1,8 @@
+{
+    "login": {
+        "title": "Sign in the application",
+        "user": "User",
+        "password": "Password",
+        "accept": "Access"
+    }
+}
