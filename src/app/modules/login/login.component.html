@@ -1,0 +1,19 @@
+<div fxFlex fxLayoutAlign="center center">
+    <mat-card fxFlex="350px" fxLayout="column">
+        <mat-card-title>
+            Login
+        </mat-card-title>
+        <mat-card-content fxFlex fxLayout="column">
+            <mat-form-field>
+                <input matInput placeholder="User" [(ngModel)]="login.user">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Password" [(ngModel)]="login.password">
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions fxFlex fxLayout="row" fxLayoutAlign="end center">
+            <button mat-raised-button color="accent" [disabled]="!login.user || !login.password"
+                (click)="doLogin()">Accept</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
