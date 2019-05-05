@@ -26,4 +26,11 @@ export class EmployeesComponent implements OnInit {
             this.employeesLoaded = true;
         });
     }
+
+    delete(employee: Employee): void {
+        this.employeesService.delete(employee.id)
+            .subscribe(() => {
+                this.getAllEmployees();
+            });
+    }
 }

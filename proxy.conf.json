@@ -1,0 +1,18 @@
+{
+    "/api/java": {
+        "target": "http://127.0.0.1:9090",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/java/*": "/api/"
+        }
+    },
+    "/api/php": {
+        "target": "http://127.0.0.1:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/java/*": "/api/"
+        }
+    }
+}

@@ -9,19 +9,24 @@ export class EmployeesService {
 
     private source: string;
 
-    private readonly javaBaseUrl: string = 'http://127.0.0.1:9090';
-    private readonly phpBaseUrl: string = 'http://127.0.0.1:8000/api';
+    private readonly javaBaseUrl: string = '/api/java';
+    private readonly phpBaseUrl: string = 'http://127.0.0.1:8000/api/php';
 
     constructor(private httpClient: HttpClient) {
         this.setSource();
     }
 
     setSource(): void {
-        this.source = this.phpBaseUrl;
+        this.source = this.javaBaseUrl;
     }
 
     getAll(): Observable<Employee[]> {
-        const url = this.source + '/employee';
+        const url = [this.source, 'employee'].join('/');
         return <Observable<Employee[]>>this.httpClient.get(url);
+    }
+
+    delete(id: string): Observable<any> {
+        const url = [this.source, 'employee', id].join('/');
+        return this.httpClient.delete(url);
     }
 }

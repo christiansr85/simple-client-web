@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EmployeesTableDatabase } from './employees-table.database';
@@ -15,6 +15,8 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
     @Input() employees: Employee[];
     @Input() loaded: boolean = false;
 
+    @Output() onDelete: EventEmitter<Employee> = new EventEmitter<Employee>();
+
     filters: {
         name: string,
         active: number
@@ -22,7 +24,7 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
             name: '',
             active: 2
         }
-    displayedColumns: string[] = ['name', 'clockIn', 'clockOut', 'active'];
+    displayedColumns: string[] = ['name', 'clockIn', 'clockOut', 'active', 'actions'];
     dataSource: EmployeesTableDataSource;
     private dataBase: EmployeesTableDatabase;
 

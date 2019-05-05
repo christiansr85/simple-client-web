@@ -12,7 +12,8 @@
                 "name": "Nombre",
                 "clockIn": "Hora de entrada",
                 "clockOut": "Hora de salida",
-                "active": "Activo"
+                "active": "Activo",
+                "actions": "Acciones"
             }
         },
         "filters": {
@@ -22,6 +23,9 @@
             "both": "Ambos"
         },
         "active": "Activo",
-        "inactive": "Inactivo"
+        "inactive": "Inactivo",
+        "actions": {
+            "delete": "Eliminar"
+        }
     }
 }
