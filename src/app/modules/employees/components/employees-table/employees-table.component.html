@@ -36,7 +36,7 @@
                 {{ 'employees.table.columns.clockIn' | translate }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element" padding-right-16>
-                <div>{{element.clockIn}}</div>
+                <date-time [dateTimeISO]="element.clockIn"></date-time>
             </mat-cell>
         </ng-container>
 
@@ -45,16 +45,17 @@
                 {{ 'employees.table.columns.clockOut' | translate }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element" padding-right-16>
-                <div>{{element.clockOut}}</div>
+                <date-time [dateTimeISO]="element.clockOut"></date-time>
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="active">
-            <mat-header-cell *matHeaderCellDef padding-right-16>
+        <ng-container matColumnDef="active" >
+            <mat-header-cell *matHeaderCellDef fxFlex="40px">
                 {{ 'employees.table.columns.active' | translate }}
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="flex-parent" padding-right-16>
-                <div class="truncate-text">{{element.active}}</div>
+            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="40px">
+                <mat-icon *ngIf="element.active">done</mat-icon>
+                <mat-icon *ngIf="!element.active">close</mat-icon>
             </mat-cell>
         </ng-container>
 

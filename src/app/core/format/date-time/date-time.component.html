@@ -1,0 +1,8 @@
+<span *ngIf="dateTimeISO">
+    <span *ngIf="recent" class="capitalize">
+        {{dateTimeISO | datetimeformat: 'calendar' }}
+    </span>
+    <span *ngIf="!recent">
+        {{dateTimeISO | datetimeformat: 'L' }} {{dateTimeISO | datetimeformat: 'HH:mm' }}
+    </span>
+</span>

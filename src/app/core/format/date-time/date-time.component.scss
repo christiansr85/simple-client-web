@@ -1,0 +1,7 @@
+.capitalize {
+  display: block;
+}
+
+.capitalize:first-letter {
+  text-transform: capitalize;
+}
