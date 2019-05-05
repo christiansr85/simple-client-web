@@ -20,6 +20,8 @@
             "active": "Active",
             "inactive": "Inactive",
             "both": "Both"
-        }
+        },
+        "active": "Active",
+        "inactive": "Inactive"
     }
 }

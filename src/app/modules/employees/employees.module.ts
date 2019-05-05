@@ -23,7 +23,7 @@ const COMPONENTS = [
       ...COMPONENTS
   ],
   providers: [
-      EmployeesService
+      
   ]
 })
 export class EmployeesModule { }

@@ -7,9 +7,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core';
-import { EmployeesModule } from './modules/employees/employees.module';
 import { LoginModule } from './modules/login/login.module';
 import { WrapperViewModule } from './modules/wrapper-view/wrapper-view.module';
+import { EmployeesService } from './services';
 
 const MODULES = [
   LoginModule,
@@ -38,7 +38,7 @@ const MODULES = [
     CoreModule,
     ...MODULES
   ],
-  providers: [],
+  providers: [EmployeesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

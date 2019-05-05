@@ -20,6 +20,8 @@
             "active": "Activos",
             "inactive": "Inactivos",
             "both": "Ambos"
-        }
+        },
+        "active": "Activo",
+        "inactive": "Inactivo"
     }
 }

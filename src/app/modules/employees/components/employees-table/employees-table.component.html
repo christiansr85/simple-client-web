@@ -54,8 +54,8 @@
                 {{ 'employees.table.columns.active' | translate }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="40px">
-                <mat-icon *ngIf="element.active">done</mat-icon>
-                <mat-icon *ngIf="!element.active">close</mat-icon>
+                <mat-icon matTooltip="{{ 'employees.active' | translate }}" *ngIf="element.active">done</mat-icon>
+                <mat-icon matTooltip="{{ 'employees.inactive' | translate }}" *ngIf="!element.active">close</mat-icon>
             </mat-cell>
         </ng-container>
 

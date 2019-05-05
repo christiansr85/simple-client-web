@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { EmployeesTableDatabase } from './employees-table.database';
 import { EmployeesTableDataSource } from './employees-table.datasource';
+import { Employee } from 'src/app/models';
 
 @Component({
     selector: 'app-employees-table',
@@ -11,7 +12,7 @@ import { EmployeesTableDataSource } from './employees-table.datasource';
 })
 export class EmployeesTableComponent implements OnInit, OnChanges {
 
-    @Input() employees;
+    @Input() employees: Employee[];
     @Input() loaded: boolean = false;
 
     filters: {
@@ -37,19 +38,19 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
         }
     }
 
-    renderTable(data: any[]) {
+    renderTable(data: Employee[]) {
         if (data && data.length) {
             this.dataBase = new EmployeesTableDatabase(data);
             this.dataSource = new EmployeesTableDataSource(this.dataBase);
         }
     }
 
-    applyFilterName(value: string): void {
+    applyFilterName(): void {
         const data = this.selectData();
         this.renderTable(data);
     }
 
-    applyFilterActive(event): void {
+    applyFilterActive(): void {
         const data = this.selectData();
         this.renderTable(data);
     }

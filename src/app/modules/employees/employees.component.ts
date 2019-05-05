@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
 
 @Component({
@@ -8,7 +9,7 @@ import { EmployeesService } from 'src/app/services';
     styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
-    employees: any[];
+    employees: Employee[];
     employeesLoaded: boolean = false;
 
     constructor(public translate: TranslateService, private employeesService: EmployeesService) {
