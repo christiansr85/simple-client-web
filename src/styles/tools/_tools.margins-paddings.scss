@@ -1,0 +1,144 @@
+///*------------------------------------------------------------
+//    #FUNCTION MARGIN PADDING MIXIN
+//-------------------------------------------------------------*/
+//  Definición de atributos
+//  Para los margin y padding se definen los siguientes atributos con la misma estructura:
+//
+//  [margin]            = Define un margin 0 en todas las direcciones.
+//  [margin-8]          = Define un margin 8px en todas las direcciones.
+//  [margin-x-8]        = Define un margin 8px horizontalmente, es decir, left y right.
+//  [margin-y-8]        = Define un margin 8px verticalmente, es decir, top y bottom.
+//  [margin-(side)-8]   = Define un margin en el lado definido(left,rigth,top,bottom) de 8px.
+//
+//  Se establecen como posibles unidades 4, 6, 10 ...
+@mixin element-side($ele, $side, $size) {
+    [#{$ele}-#{$side}] {
+      #{$ele}-#{$side}: $size;
+    }
+  }
+  
+  // Todos los márgenes separados
+  @mixin margin-all($ele, $size) {
+    html [#{$ele}-top-#{$size}] {
+      #{$ele}-top: $size + px !important;
+    }
+    html [#{$ele}-right-#{$size}] {
+      #{$ele}-right: $size + px !important;
+    }
+    html [#{$ele}-bottom-#{$size}] {
+      #{$ele}-bottom: $size + px !important;
+    }
+    html [#{$ele}-left-#{$size}] {
+      #{$ele}-left: $size + px !important;
+    }
+  } // Misma función pero individual
+  @mixin margin-side($side, $size) {
+    [magin-#{$side}-#{$size}] {
+      margin-#{$side}: $size + px !important;
+    }
+  }
+  
+  // Margin direcciones
+  @mixin margin-dir($ele, $direccion, $size) {
+    @if ($direccion== 'x') {
+      html [#{$ele}-x-#{$size}] {
+        #{$ele}-left: $size + px !important;
+        #{$ele}-right: $size + px !important;
+      }
+    }
+    @if ($direccion== 'y') {
+      html [#{$ele}-y-#{$size}] {
+        #{$ele}-top: $size + px !important;
+        #{$ele}-bottom: $size + px !important;
+      }
+    }
+  }
+  
+  // Margin general
+  @mixin margin-general($ele, $size) {
+    html [#{$ele}-#{$size}] {
+      #{$ele}: $size + px !important;
+    }
+    html [#{$ele}-#{$size*2}] {
+      #{$ele}: $size * 2 + px !important;
+    }
+    html [#{$ele}-#{$size*3}] {
+      #{$ele}: $size * 3 + px !important;
+    }
+  }
+  
+  @mixin onesize($ele, $size) {
+    /* #{$ele} individuales */
+    /* #{$ele} #{$size} */
+    @include margin-all($ele, $size);
+    /* #{$ele} direcciones */
+    /* #{$ele} horizontal */
+    @include margin-dir($ele, x, $size);
+    /* #{$ele} vertical */
+    @include margin-dir($ele, y, $size);
+    /* #{$ele} totales */
+    @include margin-general($ele, $size);
+  }
+  
+  @mixin allsizes($ele, $size) {
+    /* #{$ele} individuales */
+    /* #{$ele} small */
+    @include margin-all($ele, $size);
+    /* #{$ele} mediun */
+    @include margin-all($ele, $size * 2);
+    /* #{$ele} large */
+    @include margin-all($ele, $size * 3);
+    /* #{$ele} direcciones */
+    /* #{$ele} horizontal */
+    @include margin-dir($ele, x, $size);
+    @include margin-dir($ele, x, $size * 2);
+    @include margin-dir($ele, x, $size * 3);
+    /* #{$ele} vertical */
+    @include margin-dir($ele, y, $size);
+    @include margin-dir($ele, y, $size * 2);
+    @include margin-dir($ele, y, $size * 3);
+    /* #{$ele} totales */
+    @include margin-general($ele, $size);
+  }
+  
+  // Reglas
+  /* Margins */
+  
+  /* Reset Margin */
+  
+  @include allsizes(margin, 0);
+  @include onesize(margin, 4);
+  @include onesize(margin, 6);
+  @include allsizes(margin, 8);
+  @include allsizes(margin, 10);
+  @include allsizes(margin, 16);
+  @include allsizes(margin, 20);
+  @include allsizes(margin, 24);
+  @include allsizes(margin, 25);
+  @include allsizes(margin, 28);
+  @include allsizes(margin, 32);
+  @include allsizes(margin, 40);
+  @include allsizes(margin, 46);
+  @include allsizes(margin, 50);
+  /* Padding */
+  
+  /* Reset Padding */
+  
+  @include onesize(padding, 0);
+  @include onesize(padding, 4);
+  @include onesize(padding, 6);
+  @include allsizes(padding, 8);
+  @include allsizes(padding, 10);
+  @include allsizes(padding, 12);
+  @include allsizes(padding, 14);
+  @include allsizes(padding, 15);
+  @include allsizes(padding, 16);
+  @include allsizes(padding, 20);
+  @include allsizes(padding, 24);
+  @include allsizes(padding, 30);
+  @include allsizes(padding, 36);
+  @include allsizes(padding, 46);
+  @include allsizes(padding, 50);
+  @include allsizes(padding, 70);
+  @include allsizes(padding, 80);
+  

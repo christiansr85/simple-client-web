@@ -4,5 +4,22 @@
         "user": "User",
         "password": "Password",
         "accept": "Access"
+    },
+    "employees": {
+        "title": "Employees' list",
+        "table": {
+            "columns": {
+                "name": "Name",
+                "clockIn": "Clock in",
+                "clockOut": "Clock out",
+                "active": "Active"
+            }
+        },
+        "filters": {
+            "name": "Filter by name",
+            "active": "Active",
+            "inactive": "Inactive",
+            "both": "Both"
+        }
     }
 }

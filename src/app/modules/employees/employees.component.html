@@ -1,0 +1,8 @@
+<mat-card fxLayout="column">
+    <mat-card-title>
+        {{ 'employees.title' | translate }}
+    </mat-card-title>
+    <mat-card-content fxFlex fxLayout="column">
+        <app-employees-table [employees]="employees" [loaded]="employeesLoaded"></app-employees-table>
+    </mat-card-content>
+</mat-card>

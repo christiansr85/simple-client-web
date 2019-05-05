@@ -1,0 +1,65 @@
+<div fxFlex fxLayout="column">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-form-field>
+            <input matInput [(ngModel)]="filters.name" (keyup)="applyFilterName($event.target.value)"
+                placeholder="{{ 'employees.filters.name' | translate }}">
+        </mat-form-field>
+
+        <mat-radio-group class="employees-table__radio-group" [(ngModel)]="filters.active"
+            (change)="applyFilterActive($event)">
+            <mat-radio-button class="employees-table__radio-button" [value]="0">
+                {{ 'employees.filters.inactive' | translate }}
+            </mat-radio-button>
+            <mat-radio-button class="employees-table__radio-button" [value]="1">
+                {{ 'employees.filters.active' | translate }}
+            </mat-radio-button>
+            <mat-radio-button class="employees-table__radio-button" [value]="2">
+                {{ 'employees.filters.both' | translate }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+
+    <mat-table fxFlex #tableEmployees [dataSource]="dataSource" class="list-nohover">
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef padding-right-16>
+                {{ 'employees.table.columns.name' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="flex-parent" padding-right-16>
+                <div class="truncate-text">{{element.name}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="clockIn">
+            <mat-header-cell *matHeaderCellDef padding-right-16>
+                {{ 'employees.table.columns.clockIn' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" padding-right-16>
+                <div>{{element.clockIn}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="clockOut">
+            <mat-header-cell *matHeaderCellDef padding-right-16>
+                {{ 'employees.table.columns.clockOut' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" padding-right-16>
+                <div>{{element.clockOut}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+            <mat-header-cell *matHeaderCellDef padding-right-16>
+                {{ 'employees.table.columns.active' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="flex-parent" padding-right-16>
+                <div class="truncate-text">{{element.active}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row fxLayout="row" *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row fxLayout="row" class="employees-list-row" *matRowDef="let row; columns: displayedColumns;"
+            margin-bottom-8></mat-row>
+    </mat-table>
+</div>
