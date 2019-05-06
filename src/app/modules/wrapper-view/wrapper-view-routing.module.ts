@@ -10,12 +10,21 @@ export const rootRoutes: Routes = [
         component: WrapperViewComponent,
         children: [
             {
+                path: '',
+                redirectTo: 'employees',
+                pathMatch: 'full'
+            },
+            {
                 path: 'employees',
                 component: EmployeesComponent,
             }
         ]
     },
-    { path: '', redirectTo: '/app', pathMatch: 'full' },
+    {
+        path: '',
+        redirectTo: '/app',
+        pathMatch: 'full'
+    },
 ];
 
 @NgModule({
