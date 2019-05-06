@@ -60,10 +60,10 @@
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef fxFlex="48px" padding-right-16>
+            <mat-header-cell *matHeaderCellDef fxFlex="50px" padding-right-16>
                 {{ 'employees.table.columns.actions' | translate }}
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="48px" padding-right-16>
+            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="50px" padding-right-16>
                 <button mat-icon-button (click)="onDelete.emit(element)">
                     <mat-icon matTooltip="{{ 'employees.actions.delete' | translate }}">delete</mat-icon>
                 </button>

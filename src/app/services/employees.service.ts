@@ -10,7 +10,7 @@ export class EmployeesService {
     private source: string;
 
     private readonly javaBaseUrl: string = '/api/java';
-    private readonly phpBaseUrl: string = 'http://127.0.0.1:8000/api/php';
+    private readonly phpBaseUrl: string = '/api/php';
 
     constructor(private httpClient: HttpClient) {
         this.setSource();

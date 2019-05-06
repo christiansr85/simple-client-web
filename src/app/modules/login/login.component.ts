@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LoginService } from 'src/app/services';
 
 @Component({
     selector: 'app-view-login',
@@ -15,14 +17,26 @@ export class LoginComponent {
         password?: string
     } = {};
 
-    activeLang = 'es-ES';
+    activeLang = 'en-US';
 
-    constructor(public translate: TranslateService) {
+    constructor(
+        public translate: TranslateService,
+        private loginService: LoginService,
+        private router: Router
+    ) {
         this.translate.addLangs(['en-US', 'es-ES']);
         this.translate.setDefaultLang(this.activeLang);
     }
 
     doLogin(): void {
-        console.log(this.login);
+        this.loginService.login(this.login.user, this.login.password)
+            .subscribe(
+                result => {
+                    this.router.navigate(['app', 'employees']);
+                },
+                err => {
+                    console.log(err);
+                }
+            );
     }
 }

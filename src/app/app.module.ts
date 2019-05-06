@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core';
 import { LoginModule } from './modules/login/login.module';
 import { WrapperViewModule } from './modules/wrapper-view/wrapper-view.module';
-import { EmployeesService } from './services';
+import { EmployeesService, LoginService } from './services';
 
 const MODULES = [
   LoginModule,
@@ -38,7 +38,7 @@ const MODULES = [
     CoreModule,
     ...MODULES
   ],
-  providers: [EmployeesService],
+  providers: [LoginService, EmployeesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -12,7 +12,7 @@
         "secure": false,
         "changeOrigin": true,
         "pathRewrite": {
-            "^/api/java/*": "/api/"
+            "^/api/php/*": "/api/"
         }
     }
 }
