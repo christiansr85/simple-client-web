@@ -25,13 +25,18 @@ export class EmployeesService {
         return <Observable<Employee[]>>this.httpClient.get(url);
     }
 
-    delete(id: number): Observable<any> {
-        const url = [this.source, 'employee', id].join('/');
+    delete(userId: number): Observable<any> {
+        const url = [this.source, 'employee', userId].join('/');
         return this.httpClient.delete(url);
     }
 
     create(employee: Employee): Observable<any> {
         const url = [this.source, 'employee'].join('/');
         return this.httpClient.post(url, employee);
+    }
+
+    update(employee: Employee, userId: number): Observable<any> {
+        const url = [this.source, 'employee', userId].join('/');
+        return this.httpClient.patch(url, employee);
     }
 }

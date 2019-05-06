@@ -25,7 +25,8 @@
         "active": "Active",
         "inactive": "Inactive",
         "actions": {
-            "delete": "Delete"
+            "delete": "Delete",
+            "edit": "Edit"
         },
         "detail": {
             "name": "Name",

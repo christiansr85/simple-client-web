@@ -41,6 +41,20 @@ export class EmployeesComponent implements OnInit {
             });
     }
 
+    onUpdateDialog(employee: Employee): void {
+        const dialogRef = this.dialog.open(EmployeesDetailDialogComponent, {
+            data: employee
+        });
+
+        dialogRef.componentInstance.onAccept.subscribe(employee => {
+            this.update(employee);
+            dialogRef.close();
+        });
+        dialogRef.componentInstance.onCancel.subscribe(() => {
+            dialogRef.close();
+        });
+    }
+
     onAddDialog(): void {
         const dialogRef = this.dialog.open(EmployeesDetailDialogComponent, {
         });
@@ -56,6 +70,13 @@ export class EmployeesComponent implements OnInit {
 
     create(employee: Employee): void {
         this.employeesService.create(employee)
+            .subscribe(() => {
+                this.getAllEmployees();
+            });
+    }
+
+    update(employee: Employee): void {
+        this.employeesService.update(employee, employee.userId)
             .subscribe(() => {
                 this.getAllEmployees();
             });

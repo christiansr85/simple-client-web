@@ -20,6 +20,6 @@ export class EmployeesDetailDialogComponent {
         public dialogRef: MatDialogRef<EmployeesDetailDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Employee
     ) {
-        this.employee = data || {};
+        this.employee = {...data} || {};
     }
 }

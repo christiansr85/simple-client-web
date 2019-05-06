@@ -50,20 +50,23 @@
         </ng-container>
 
         <ng-container matColumnDef="active">
-            <mat-header-cell *matHeaderCellDef fxFlex="40px">
+            <mat-header-cell *matHeaderCellDef fxFlex="50px">
                 {{ 'employees.table.columns.active' | translate }}
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="40px">
+            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="50px">
                 <mat-icon matTooltip="{{ 'employees.active' | translate }}" *ngIf="element.active">done</mat-icon>
                 <mat-icon matTooltip="{{ 'employees.inactive' | translate }}" *ngIf="!element.active">close</mat-icon>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef fxFlex="50px" padding-right-16>
+            <mat-header-cell *matHeaderCellDef fxFlex="70px" padding-right-16>
                 {{ 'employees.table.columns.actions' | translate }}
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="50px" padding-right-16>
+            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="70px" padding-right-16>
+                <button mat-icon-button (click)="onUpdate.emit(element)">
+                    <mat-icon matTooltip="{{ 'employees.actions.edit' | translate }}">create</mat-icon>
+                </button>
                 <button mat-icon-button (click)="onDelete.emit(element)">
                     <mat-icon matTooltip="{{ 'employees.actions.delete' | translate }}">delete</mat-icon>
                 </button>

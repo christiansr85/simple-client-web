@@ -16,6 +16,7 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
     @Input() loaded: boolean = false;
 
     @Output() onDelete: EventEmitter<Employee> = new EventEmitter<Employee>();
+    @Output() onUpdate: EventEmitter<Employee> = new EventEmitter<Employee>();
 
     filters: {
         name: string,
