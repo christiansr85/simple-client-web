@@ -41,10 +41,8 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
     }
 
     renderTable(data: Employee[]) {
-        if (data && data.length) {
-            this.dataBase = new EmployeesTableDatabase(data);
-            this.dataSource = new EmployeesTableDataSource(this.dataBase);
-        }
+        this.dataBase = new EmployeesTableDatabase(data);
+        this.dataSource = new EmployeesTableDataSource(this.dataBase);
     }
 
     applyFilterName(): void {

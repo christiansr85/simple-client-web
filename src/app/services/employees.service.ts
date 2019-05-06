@@ -25,7 +25,7 @@ export class EmployeesService {
         return <Observable<Employee[]>>this.httpClient.get(url);
     }
 
-    delete(id: string): Observable<any> {
+    delete(id: number): Observable<any> {
         const url = [this.source, 'employee', id].join('/');
         return this.httpClient.delete(url);
     }

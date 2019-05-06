@@ -6,4 +6,9 @@
         <app-employees-table [employees]="employees" [loaded]="employeesLoaded" (onDelete)="delete($event)">
         </app-employees-table>
     </mat-card-content>
+    <mat-card-actions fxFlex fxLayoutAlign="end center">
+        <button mat-fab color="primary" (click)="onAddDialog()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-actions>
 </mat-card>
