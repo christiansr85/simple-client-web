@@ -29,4 +29,9 @@ export class EmployeesService {
         const url = [this.source, 'employee', id].join('/');
         return this.httpClient.delete(url);
     }
+
+    create(employee: Employee): Observable<any> {
+        const url = [this.source, 'employee'].join('/');
+        return this.httpClient.post(url, employee);
+    }
 }

@@ -43,8 +43,21 @@ export class EmployeesComponent implements OnInit {
 
     onAddDialog(): void {
         const dialogRef = this.dialog.open(EmployeesDetailDialogComponent, {
-            width: '250px',
-            // data: {name: this.name, animal: this.animal}
         });
+
+        dialogRef.componentInstance.onAccept.subscribe(employee => {
+            this.create(employee);
+            dialogRef.close();
+        });
+        dialogRef.componentInstance.onCancel.subscribe(() => {
+            dialogRef.close();
+        });
+    }
+
+    create(employee: Employee): void {
+        this.employeesService.create(employee)
+            .subscribe(() => {
+                this.getAllEmployees();
+            });
     }
 }

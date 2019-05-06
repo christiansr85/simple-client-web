@@ -1,3 +1,26 @@
-<div>
-    EmPLOYEES DETAIL
+<div fxFlex fxLayout="column">
+    <div fxFlex fxLayoutGap="16px">
+        <mat-form-field>
+            <input #name matInput [(ngModel)]="employee.name" placeholder="{{ 'employees.detail.name' | translate }}">
+        </mat-form-field>
+        <mat-slide-toggle [checked]="employee.active" (change)="employee.active = $event.checked;">
+            {{ 'employees.detail.active' | translate }}
+        </mat-slide-toggle>
+    </div>
+
+    <mat-form-field>
+        <input matInput [(ngModel)]="employee.clockIn" placeholder="{{ 'employees.detail.clockIn' | translate }}">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="employee.clockOut" placeholder="{{ 'employees.detail.clockOut' | translate }}">
+    </mat-form-field>
+
+    <div fxflex fxLayoutAlign="end center" fxLayoutGap="16px">
+        <button mat-button color="primary" (click)="onCancel.emit()">
+            {{ 'employees.detail.cancel' | translate }}
+        </button>
+        <button mat-raised-button color="primary" (click)="onAccept.emit(employee)" [disabled]="!name.value">
+            {{ 'employees.detail.accept' | translate }}
+        </button>
+    </div>
 </div>

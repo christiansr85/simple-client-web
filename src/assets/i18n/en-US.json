@@ -26,6 +26,14 @@
         "inactive": "Inactive",
         "actions": {
             "delete": "Delete"
+        },
+        "detail": {
+            "name": "Name",
+            "active": "Active",
+            "clockIn": "Clock in",
+            "clockOut": "Clock out",
+            "cancel": "Cancel",
+            "accept": "Save"
         }
     }
 }
