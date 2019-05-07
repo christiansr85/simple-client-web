@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LoginService } from 'src/app/services';
+import { first } from 'rxjs/internal/operators/first';
+import { AuthenticationService } from 'src/app/services';
 
 @Component({
     selector: 'app-view-login',
@@ -10,33 +11,48 @@ import { LoginService } from 'src/app/services';
     encapsulation: ViewEncapsulation.None,
     host: { 'class': 'app-login' }
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
     login: {
-        user?: string,
+        email?: string,
         password?: string
     } = {};
 
+    loading = false;
+    error = '';
+    returnUrl: string;
     activeLang = 'en-US';
 
     constructor(
         public translate: TranslateService,
-        private loginService: LoginService,
-        private router: Router
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService
     ) {
         this.translate.addLangs(['en-US', 'es-ES']);
         this.translate.setDefaultLang(this.activeLang);
     }
 
+    ngOnInit(): void {
+        // reset login status
+        this.authenticationService.logout();
+
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
+
     doLogin(): void {
-        this.loginService.login(this.login.user, this.login.password)
+        this.loading = true;
+        this.authenticationService.login(this.login.email, this.login.password)
+            .pipe(first())
             .subscribe(
-                result => {
-                    this.router.navigate(['app', 'employees']);
+                data => {
+                    this.router.navigate([this.returnUrl]);
                 },
-                err => {
-                    console.log(err);
-                }
-            );
+                error => {
+                    this.error = error;
+                    this.loading = false;
+                });
+
     }
 }

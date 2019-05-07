@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { EmployeesComponent } from '../employees/employees.component';
 import { WrapperViewComponent } from './wrapper-view.component';
+import { AuthGuard } from 'src/app/guards';
 
 export const rootRoutes: Routes = [
     {
         path: 'app',
         component: WrapperViewComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',

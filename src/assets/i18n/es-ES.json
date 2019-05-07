@@ -1,7 +1,7 @@
 {
     "login": {
         "title": "Introduce tus credenciales",
-        "user": "Usuario",
+        "email": "Email",
         "password": "Contraseña",
         "accept": "Acceder"
     },

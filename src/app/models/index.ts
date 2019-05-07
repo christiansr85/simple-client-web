@@ -1,1 +1,2 @@
-export * from './employee.interface';
+export * from './employee';
+export * from './user';
