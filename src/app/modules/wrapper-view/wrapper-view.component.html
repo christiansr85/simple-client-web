@@ -1,5 +1,17 @@
 <div class="wrapper-view">
-    <mat-toolbar color="primary" class="wrapper-view__toolbar"></mat-toolbar>
+    <mat-toolbar color="primary" class="wrapper-view__toolbar">
+        <div fxFlex fxLayoutAlign="end center">
+            <mat-menu #userMenu="matMenu">
+                <button mat-menu-item (click)="doLogout();">{{ 'user.menu.logout' | translate }}</button>
+                <!-- <button mat-menu-item>Help</button> -->
+            </mat-menu>
+
+            <button mat-icon-button [matMenuTriggerFor]="userMenu">
+                <mat-icon aria-label="User">account_circle</mat-icon>
+            </button>
+        </div>
+
+    </mat-toolbar>
     <div class="wrapper-view__body">
         <div class="wrapper-view__body-content">
             <router-outlet></router-outlet>

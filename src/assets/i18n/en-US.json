@@ -36,5 +36,10 @@
             "cancel": "Cancel",
             "accept": "Save"
         }
+    },
+    "user": {
+        "menu": {
+            "logout": "Logout"
+        }
     }
 }
