@@ -8,19 +8,24 @@
         </mat-slide-toggle>
     </div>
 
-    <mat-form-field>
-        <input matInput [(ngModel)]="employee.clockIn" [matDatepicker]="clockIn"
-            placeholder="{{ 'employees.detail.clockIn' | translate }}">
-        <mat-datepicker-toggle matSuffix [for]="clockIn"></mat-datepicker-toggle>
-        <mat-datepicker #clockIn></mat-datepicker>
-    </mat-form-field>
+    <div fxFlex fxLayputGap="16px">
+        <mat-form-field>
+            <input matInput [(ngModel)]="employee.clockIn" [matDatepicker]="clockIn"
+                placeholder="{{ 'employees.detail.clockIn' | translate }}">
+            <mat-datepicker-toggle matSuffix [for]="clockIn"></mat-datepicker-toggle>
+            <mat-datepicker #clockIn></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field>
-        <input matInput [(ngModel)]="employee.clockOut" [matDatepicker]="clockOut"
-            placeholder="{{ 'employees.detail.clockOut' | translate }}">
-        <mat-datepicker-toggle matSuffix [for]="clockOut"></mat-datepicker-toggle>
-        <mat-datepicker #clockOut></mat-datepicker>
-    </mat-form-field>
+    </div>
+
+    <div fxFlex fxLayputGap="16px">
+        <mat-form-field>
+            <input matInput [(ngModel)]="employee.clockOut" [matDatepicker]="clockOut"
+                placeholder="{{ 'employees.detail.clockOut' | translate }}">
+            <mat-datepicker-toggle matSuffix [for]="clockOut"></mat-datepicker-toggle>
+            <mat-datepicker #clockOut></mat-datepicker>
+        </mat-form-field>
+    </div>
 
     <div fxflex fxLayoutAlign="end center" fxLayoutGap="16px">
         <button mat-button color="primary" (click)="onCancel.emit()">
