@@ -3,7 +3,7 @@
         {{ 'employees.title' | translate }}
     </mat-card-title>
     <mat-card-content fxFlex fxLayout="column">
-        <app-employees-table [employees]="employees" [loaded]="employeesLoaded" (onDelete)="delete($event)"
+        <app-employees-table [employees]="employees$ | async" [loaded]="employeesLoaded" (onDelete)="delete($event)"
             (onUpdate)="onUpdate($event)">
         </app-employees-table>
     </mat-card-content>

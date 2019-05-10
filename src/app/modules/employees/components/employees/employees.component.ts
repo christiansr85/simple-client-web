@@ -5,6 +5,10 @@ import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialog } from 'src/app/components';
+import { Store } from '@ngrx/store';
+import * as EmployeeReducers from '../../store/employee.reducers';
+import * as EmployeeActions from '../../store/employee.actions';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-employees',
@@ -15,24 +19,28 @@ export class EmployeesComponent implements OnInit {
     employees: Employee[];
     employeesLoaded: boolean = false;
 
+    employees$: Observable<Employee[]>;
     constructor(
         public translate: TranslateService,
+        private storeEmployee: Store<EmployeeReducers.EmployeeState>,
         private dialog: MatDialog,
         private employeesService: EmployeesService,
         private router: Router
     ) {
+        this.employees$ = this.storeEmployee.select(EmployeeReducers.selectAll);
     }
 
     ngOnInit(): void {
-        this.getAllEmployees();
+        this.getAllEmployees();        
     }
 
     getAllEmployees(): void {
-        this.employeesLoaded = false;
-        this.employeesService.getAll().subscribe(result => {
-            this.employees = result;
-            this.employeesLoaded = true;
-        });
+        // this.employeesLoaded = false;
+        // this.employeesService.getAll().subscribe(result => {
+        //     this.employees = result;
+        //     this.employeesLoaded = true;
+        // });
+        this.storeEmployee.dispatch(new EmployeeActions.EmployeeListAction());
     }
 
     delete(employee: Employee): void {
