@@ -27,12 +27,4 @@
         </mat-form-field>
     </div>
 
-    <div fxflex fxLayoutAlign="end center" fxLayoutGap="16px">
-        <button mat-button color="primary" (click)="onCancel.emit()">
-            {{ 'employees.detail.cancel' | translate }}
-        </button>
-        <button mat-raised-button color="primary" (click)="onAccept.emit(employee)" [disabled]="!name.value">
-            {{ 'employees.detail.accept' | translate }}
-        </button>
-    </div>
 </div>

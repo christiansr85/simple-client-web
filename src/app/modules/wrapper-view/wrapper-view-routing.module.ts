@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { EmployeesComponent } from '../employees/employees.component';
-import { WrapperViewComponent } from './wrapper-view.component';
 import { AuthGuard } from 'src/app/guards';
+
+import { EmployeesComponent, EmployeeComponent } from '../employees/components';
+import { WrapperViewComponent } from './wrapper-view.component';
 
 export const rootRoutes: Routes = [
     {
@@ -19,6 +19,14 @@ export const rootRoutes: Routes = [
             {
                 path: 'employees',
                 component: EmployeesComponent,
+            },
+            {
+                path: 'employee',
+                component: EmployeeComponent
+            },
+            {
+                path: 'employee/:id',
+                component: EmployeeComponent
             }
         ]
     },

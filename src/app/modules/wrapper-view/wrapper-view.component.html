@@ -3,7 +3,6 @@
         <div fxFlex fxLayoutAlign="end center">
             <mat-menu #userMenu="matMenu">
                 <button mat-menu-item (click)="doLogout();">{{ 'user.menu.logout' | translate }}</button>
-                <!-- <button mat-menu-item>Help</button> -->
             </mat-menu>
 
             <button mat-icon-button [matMenuTriggerFor]="userMenu">

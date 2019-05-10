@@ -1,0 +1,16 @@
+<mat-card fxLayout="column">
+    <mat-card-title>
+        {{ 'employees.title' | translate }}
+    </mat-card-title>
+    <mat-card-content fxFlex fxLayout="column">
+        <app-employees-detail [employee]="employee"></app-employees-detail>
+    </mat-card-content>
+    <mat-card-actions fxFlex fxLayoutAlign="end center" fxLayoutGap="16px">
+        <button mat-button color="primary" (click)="onCancel();">
+            <span>Cancel</span>
+        </button>
+        <button mat-raised-button color="primary">
+            <span>Store</span>
+        </button>
+    </mat-card-actions>
+</mat-card>

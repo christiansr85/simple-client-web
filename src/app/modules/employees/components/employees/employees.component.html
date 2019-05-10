@@ -4,11 +4,11 @@
     </mat-card-title>
     <mat-card-content fxFlex fxLayout="column">
         <app-employees-table [employees]="employees" [loaded]="employeesLoaded" (onDelete)="delete($event)"
-            (onUpdate)="onUpdateDialog($event)">
+            (onUpdate)="onUpdate($event)">
         </app-employees-table>
     </mat-card-content>
     <mat-card-actions fxFlex fxLayoutAlign="end center">
-        <button mat-fab color="primary" (click)="onAddDialog()">
+        <button mat-fab color="primary" (click)="onAdd()">
             <mat-icon>add</mat-icon>
         </button>
     </mat-card-actions>

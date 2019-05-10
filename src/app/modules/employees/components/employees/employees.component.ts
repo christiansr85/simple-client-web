@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
-
-import { EmployeesDetailDialogComponent } from './components/employees-detail/employees-detail-dialog.component';
 
 @Component({
     selector: 'app-employees',
@@ -18,7 +16,7 @@ export class EmployeesComponent implements OnInit {
     constructor(
         public translate: TranslateService,
         private employeesService: EmployeesService,
-        public dialog: MatDialog
+        private router: Router
     ) {
     }
 
@@ -41,31 +39,12 @@ export class EmployeesComponent implements OnInit {
             });
     }
 
-    onUpdateDialog(employee: Employee): void {
-        const dialogRef = this.dialog.open(EmployeesDetailDialogComponent, {
-            data: employee
-        });
-
-        dialogRef.componentInstance.onAccept.subscribe(employee => {
-            this.update(employee);
-            dialogRef.close();
-        });
-        dialogRef.componentInstance.onCancel.subscribe(() => {
-            dialogRef.close();
-        });
+    onUpdate(employee: Employee): void {
+        this.router.navigate(['app', 'employee', employee.userId]);
     }
 
-    onAddDialog(): void {
-        const dialogRef = this.dialog.open(EmployeesDetailDialogComponent, {
-        });
-
-        dialogRef.componentInstance.onAccept.subscribe(employee => {
-            this.create(employee);
-            dialogRef.close();
-        });
-        dialogRef.componentInstance.onCancel.subscribe(() => {
-            dialogRef.close();
-        });
+    onAdd(): void {
+        this.router.navigate(['app','employee']);
     }
 
     create(employee: Employee): void {

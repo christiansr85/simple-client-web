@@ -20,6 +20,11 @@ export class EmployeesService {
         this.source = this.javaBaseUrl;
     }
 
+    get(userId: number) {
+        const url = [this.source, 'employee', userId].join('/');
+        return <Observable<Employee>>this.httpClient.get(url);
+    }
+
     getAll(): Observable<Employee[]> {
         const url = [this.source, 'employee'].join('/');
         return <Observable<Employee[]>>this.httpClient.get(url);
