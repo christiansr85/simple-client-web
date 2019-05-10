@@ -6,6 +6,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ConfirmDialog } from './components';
 import { CoreModule } from './core';
 import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { LoginModule } from './modules/login/login.module';
@@ -19,7 +20,8 @@ const MODULES = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfirmDialog
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,9 @@ const MODULES = [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthenticationService,
     EmployeesService
+  ],
+  entryComponents: [
+    ConfirmDialog
   ],
   bootstrap: [
     AppComponent

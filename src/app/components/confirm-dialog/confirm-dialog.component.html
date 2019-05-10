@@ -1,0 +1,13 @@
+<div fxFlex fxLayout="column" fxLayoutGap="16px" padding-16>
+    <mat-dialog-content>
+        {{ data.message }}
+    </mat-dialog-content>
+    <mat-dialog-actions fxFlex fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
+        <button mat-button color="primary" mat-dialog-close="false">
+            <span> {{ 'dialog.confirm.cancel' | translate }} </span>
+        </button>
+        <button mat-raised-button color="primary" mat-dialog-close="true">
+            <span>{{ 'dialog.confirm.accept' | translate }}</span>
+        </button>
+    </mat-dialog-actions>
+</div>

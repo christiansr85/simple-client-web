@@ -46,11 +46,18 @@
             "clockOut": "Hora de salida",
             "cancel": "Cancelar",
             "accept": "Guardar"
-        }
+        },
+        "delete_confirm": "¿Está seguro de que desea eliminar este empleado?"
     },
     "user": {
         "menu": {
             "logout": "Cerrar sesión"
+        }
+    },
+    "dialog": {
+        "confirm": {
+            "accept": "Aceptar",
+            "cancel": "Cancelar"
         }
     }
 }

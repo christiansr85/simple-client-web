@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
+import { MatDialog } from '@angular/material';
+import { ConfirmDialog } from 'src/app/components';
 
 @Component({
     selector: 'app-employees',
@@ -15,6 +17,7 @@ export class EmployeesComponent implements OnInit {
 
     constructor(
         public translate: TranslateService,
+        private dialog: MatDialog,
         private employeesService: EmployeesService,
         private router: Router
     ) {
@@ -33,10 +36,19 @@ export class EmployeesComponent implements OnInit {
     }
 
     delete(employee: Employee): void {
-        this.employeesService.delete(employee.userId)
-            .subscribe(() => {
-                this.getAllEmployees();
-            });
+        const dialogRef = this.dialog.open(ConfirmDialog, {
+            disableClose: true,
+            data: { message: this.translate.instant('employees.delete_confirm') }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && JSON.parse(result) === true) {
+                this.employeesService.delete(employee.userId)
+                    .subscribe(() => {
+                        this.getAllEmployees();
+                    });
+            }
+        });
     }
 
     onUpdate(employee: Employee): void {
@@ -44,7 +56,7 @@ export class EmployeesComponent implements OnInit {
     }
 
     onAdd(): void {
-        this.router.navigate(['app','employee']);
+        this.router.navigate(['app', 'employee']);
     }
 
     create(employee: Employee): void {
