@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/internal/operators/first';
 import { AuthenticationService } from 'src/app/services';
 
+/**
+ * Login view, where user can get access to the application.
+ */
 @Component({
     selector: 'app-view-login',
     templateUrl: './login.component.html',
@@ -13,12 +17,14 @@ import { AuthenticationService } from 'src/app/services';
 })
 export class LoginComponent implements OnInit {
 
+    loginForm: FormGroup;
+    submitted = false;
+
     login: {
         email?: string,
         password?: string
     } = {};
 
-    loading = false;
     error = '';
     returnUrl: string;
     activeLang = 'en-US';
@@ -27,6 +33,7 @@ export class LoginComponent implements OnInit {
         public translate: TranslateService,
         private route: ActivatedRoute,
         private router: Router,
+        private formBuilder: FormBuilder,
         private authenticationService: AuthenticationService
     ) {
         this.translate.addLangs(['en-US', 'es-ES']);
@@ -34,16 +41,32 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // reset login status
         this.authenticationService.logout();
 
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.loginForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6)]]
+        });
+
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/app/employees';
     }
 
-    doLogin(): void {
-        this.loading = true;
-        this.authenticationService.login(this.login.email, this.login.password)
+    /**
+     * Accessor in order to ease the access to the form controls.
+     */
+    get f() { return this.loginForm.controls; }
+
+    /**
+     * Method executed when user wants to do login.
+     */
+    onSubmit() {
+        this.submitted = true;
+
+        if (this.loginForm.invalid) {
+            return;
+        }
+
+        this.authenticationService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
@@ -51,8 +74,6 @@ export class LoginComponent implements OnInit {
                 },
                 error => {
                     this.error = error;
-                    this.loading = false;
                 });
-
     }
 }

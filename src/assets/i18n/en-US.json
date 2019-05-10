@@ -3,7 +3,18 @@
         "title": "Sign in the application",
         "email": "Email",
         "password": "Password",
-        "accept": "Access"
+        "accept": "Access",
+        "errors": {
+            "connection": "There was an error with the server. Try it later, please",
+            "required": {
+                "email": "Email is required",
+                "password": "Password is required"
+            },
+            "invalid": {
+                "email": "Email must be a valid email address",
+                "password": "Password must be at least 6 characters"
+            }
+        }
     },
     "employees": {
         "title": "Employees' list",

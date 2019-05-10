@@ -3,7 +3,18 @@
         "title": "Introduce tus credenciales",
         "email": "Email",
         "password": "Contraseña",
-        "accept": "Acceder"
+        "accept": "Acceder",
+        "errors": {
+            "connection": "Ha ocurrido un error con el servidor. Pruebe más tarde, por favor.",
+            "required": {
+                "email": "El email es requerido",
+                "password": "El password es requerido"
+            },
+            "invalid": {
+                "email": "El email debe ser una dirección de email válida",
+                "password": "El password debe tener, al menos, 6 caracteres"
+            }
+        }
     },
     "employees": {
         "title": "Lista de empleados",
