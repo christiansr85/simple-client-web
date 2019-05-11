@@ -1,24 +1,23 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Employee } from 'src/app/models';
+
 import * as EmployeeActions from './employee.actions';
 
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/store';
-
-export interface EmployeeState extends EntityState<Employee> {
+export interface EmployeeState {
     employee?: Employee;
-    employees?: any[];
+    employees?: Employee[];
     loading?: boolean;
     loaded?: boolean;
+    error?: boolean;
 }
 
-export const adapter: EntityAdapter<Employee> = createEntityAdapter<Employee>();
-
-export const initialState: EmployeeState = adapter.getInitialState({
+export const initialState: EmployeeState = {
     employees: [],
     employee: null,
     loading: false,
-    loaded: false
-});
+    loaded: false,
+    error: false
+};
 
 export function reducer(
     state = initialState,
@@ -29,22 +28,52 @@ export function reducer(
             return {
                 ...state,
                 loaded: false,
-                loading: true
+                loading: true,
+                error: false
             };
         }
         case EmployeeActions.EmployeeActionTypes.EMPLOYEE_GET_LIST_SUCCESS: {
-            return adapter.addAll(action.payload, {
+            return {
                 ...state,
+                employees: action.payload,
                 loaded: true,
-                loading: false
-            });
+                loading: false,
+                error: false
+            };
         }
         case EmployeeActions.EmployeeActionTypes.EMPLOYEE_GET_LIST_FAIL: {
-            return adapter.removeAll({
+            return {
+                ...state,
+                employees: [],
+                loaded: true,
+                loading: false,
+                error: true
+            };
+        }
+        case EmployeeActions.EmployeeActionTypes.EMPLOYEE_DELETE: {
+            return {
+                ...state,
+                loaded: false,
+                loading: true,
+                error: false
+            };
+        }
+        case EmployeeActions.EmployeeActionTypes.EMPLOYEE_DELETE_SUCCESS: {
+            return {
+                ...state,
+                employees: state.employees.filter(item => item.userId !== action.payload),
+                loaded: true,
+                loading: false,
+                error: false
+            };
+        }
+        case EmployeeActions.EmployeeActionTypes.EMPLOYEE_DELETE_FAIL: {
+            return {
                 ...state,
                 loaded: true,
-                loading: false
-            });
+                loading: false,
+                error: true
+            };
         }
         default: {
             return state;
@@ -55,14 +84,16 @@ export function reducer(
 export const employeeFeature = 'employeeFeature';
 export const selectEmployeeState = createFeatureSelector<EmployeeState>(employeeFeature);
 
-export const getEmployees = createSelector(selectEmployeeState, (state: EmployeeState) => state.employees);
+export const getAll = createSelector(selectEmployeeState, (state: EmployeeState) => state.employees);
 
-export const {
-  // select the array of employee ids
-  selectIds,
-  // select the dictionary of employee entities
-  selectEntities,
-  // select the array of employee
-  selectAll,
-} = adapter.getSelectors(selectEmployeeState);
+export const selectFlags = createSelector(
+    selectEmployeeState,
+    (state: EmployeeState) => {
+        return {
+            loaded: state.loaded,
+            loading: state.loading,
+        };
+    }
+);
+
 

@@ -13,12 +13,23 @@ import * as EmployeeActions from './employee.actions';
 export class EmployeeEffects {
 
     @Effect()
-    getCustomers: Observable<EmployeeActions.EmployeeActionsUnion> = this.actions$.pipe(
+    getEmployees: Observable<EmployeeActions.EmployeeActionsUnion> = this.actions$.pipe(
         ofType(EmployeeActions.EmployeeActionTypes.EMPLOYEE_GET_LIST),
         switchMap(() =>
             this.employeesService.getAll().pipe(
                 map(employees => new EmployeeActions.EmployeeListSuccessAction(employees)),
                 catchError(error => of(new EmployeeActions.EmployeeListFailAction(error))),
+            ),
+        ),
+    );
+
+    @Effect()
+    deleteEmployee: Observable<EmployeeActions.EmployeeActionsUnion> = this.actions$.pipe(
+        ofType(EmployeeActions.EmployeeActionTypes.EMPLOYEE_DELETE),
+        switchMap((action: EmployeeActions.EmployeeActionsUnion) =>
+            this.employeesService.delete(action.payload).pipe(
+                map(() => new EmployeeActions.EmployeeDeleteSuccessAction(action.payload)),
+                catchError(error => of(new EmployeeActions.EmployeeDeleteFailAction(error))),
             ),
         ),
     );

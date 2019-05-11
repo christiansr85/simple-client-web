@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Employee } from 'src/app/models';
@@ -8,18 +8,21 @@ import { ConfirmDialog } from 'src/app/components';
 import { Store } from '@ngrx/store';
 import * as EmployeeReducers from '../../store/employee.reducers';
 import * as EmployeeActions from '../../store/employee.actions';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-employees',
     templateUrl: './employees.component.html',
     styleUrls: ['./employees.component.scss']
 })
-export class EmployeesComponent implements OnInit {
+export class EmployeesComponent implements OnInit, OnDestroy {
     employees: Employee[];
-    employeesLoaded: boolean = false;
+    loaded: boolean = false;
+    loading: boolean = false;
 
     employees$: Observable<Employee[]>;
+
+    private subscription: Subscription = new Subscription();
     constructor(
         public translate: TranslateService,
         private storeEmployee: Store<EmployeeReducers.EmployeeState>,
@@ -27,19 +30,25 @@ export class EmployeesComponent implements OnInit {
         private employeesService: EmployeesService,
         private router: Router
     ) {
-        this.employees$ = this.storeEmployee.select(EmployeeReducers.selectAll);
+        this.employees$ = this.storeEmployee.select(EmployeeReducers.getAll);
+        this.subscription.add(
+            this.storeEmployee.select(EmployeeReducers.selectFlags)
+                .subscribe(({ loaded, loading }) => {
+                    this.loaded = loaded;
+                    this.loading = loading;
+                })
+        );
     }
 
     ngOnInit(): void {
-        this.getAllEmployees();        
+        this.getAllEmployees();
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     getAllEmployees(): void {
-        // this.employeesLoaded = false;
-        // this.employeesService.getAll().subscribe(result => {
-        //     this.employees = result;
-        //     this.employeesLoaded = true;
-        // });
         this.storeEmployee.dispatch(new EmployeeActions.EmployeeListAction());
     }
 
@@ -51,10 +60,7 @@ export class EmployeesComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result && JSON.parse(result) === true) {
-                this.employeesService.delete(employee.userId)
-                    .subscribe(() => {
-                        this.getAllEmployees();
-                    });
+                this.storeEmployee.dispatch(new EmployeeActions.EmployeeDeleteAction(employee.userId));
             }
         });
     }
