@@ -72,18 +72,4 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     onAdd(): void {
         this.router.navigate(['app', 'employee']);
     }
-
-    create(employee: Employee): void {
-        this.employeesService.create(employee)
-            .subscribe(() => {
-                this.getAllEmployees();
-            });
-    }
-
-    update(employee: Employee): void {
-        this.employeesService.update(employee, employee.userId)
-            .subscribe(() => {
-                this.getAllEmployees();
-            });
-    }
 }

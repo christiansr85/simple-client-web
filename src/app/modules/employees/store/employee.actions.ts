@@ -9,6 +9,10 @@ export enum EmployeeActionTypes {
     EMPLOYEE_DELETE = '[Employee] Delete employee',
     EMPLOYEE_DELETE_SUCCESS = '[Employee] Delete employee SUCCESS',
     EMPLOYEE_DELETE_FAIL = '[Employee] Delete employee FAIL',
+
+    EMPLOYEE_GET = '[Employee] Get employe',
+    EMPLOYEE_GET_SUCCESS = '[Employee] Get employe SUCCESS',
+    EMPLOYEE_GET_FAIL = '[Employee] Get employe FAIL',
 }
 
 export class EmployeeListAction implements Action {
@@ -41,6 +45,21 @@ export class EmployeeDeleteFailAction implements Action {
     constructor(public payload?: any) { }
 }
 
+export class EmployeeGetAction implements Action {
+    readonly type = EmployeeActionTypes.EMPLOYEE_GET;
+    constructor(public payload: number) { }
+}
+
+export class EmployeeGetSuccessAction implements Action {
+    readonly type = EmployeeActionTypes.EMPLOYEE_GET_SUCCESS;
+    constructor(public payload: Employee) { }
+}
+
+export class EmployeeGetFailAction implements Action {
+    readonly type = EmployeeActionTypes.EMPLOYEE_GET_FAIL;
+    constructor(public payload?: any) { }
+}
+
 export type EmployeeActionsUnion =
   | EmployeeListAction
   | EmployeeListSuccessAction
@@ -48,4 +67,7 @@ export type EmployeeActionsUnion =
   | EmployeeDeleteAction
   | EmployeeDeleteSuccessAction
   | EmployeeDeleteFailAction
+  | EmployeeGetAction
+  | EmployeeGetSuccessAction
+  | EmployeeGetFailAction
   ;

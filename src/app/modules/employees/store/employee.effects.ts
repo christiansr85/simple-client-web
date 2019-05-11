@@ -34,6 +34,17 @@ export class EmployeeEffects {
         ),
     );
 
+    @Effect()
+    getEmployee: Observable<EmployeeActions.EmployeeActionsUnion> = this.actions$.pipe(
+        ofType(EmployeeActions.EmployeeActionTypes.EMPLOYEE_GET),
+        switchMap((action: EmployeeActions.EmployeeActionsUnion) =>
+            this.employeesService.get(action.payload).pipe(
+                map(() => new EmployeeActions.EmployeeGetSuccessAction(action.payload)),
+                catchError(error => of(new EmployeeActions.EmployeeGetFailAction(error))),
+            ),
+        ),
+    );
+
     constructor(
         private actions$: Actions,
         private employeesService: EmployeesService

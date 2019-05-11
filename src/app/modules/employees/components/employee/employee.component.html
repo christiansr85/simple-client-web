@@ -2,13 +2,13 @@
     <mat-card-title>
     </mat-card-title>
     <mat-card-content fxFlex fxLayout="column">
-        <app-employees-detail [employee]="employee"></app-employees-detail>
+        <app-employees-detail [employee]="employee" (onFormChange)="onFormChange($event)"></app-employees-detail>
     </mat-card-content>
     <mat-card-actions fxFlex fxLayoutAlign="end center" fxLayoutGap="16px">
         <button mat-button color="primary" (click)="onCancel();">
             <span>{{ 'employees.detail.cancel' | translate }}</span>
         </button>
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" (click)="store();" [disabled]="!employeeForm || !employeeForm.valid">
             <span>{{ 'employees.detail.accept' | translate }}</span>
         </button>
     </mat-card-actions>
