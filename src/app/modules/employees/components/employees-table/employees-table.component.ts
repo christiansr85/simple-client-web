@@ -5,6 +5,9 @@ import { EmployeesTableDatabase } from './employees-table.database';
 import { EmployeesTableDataSource } from './employees-table.datasource';
 import { Employee } from 'src/app/models';
 
+/**
+ * Table which lists the employees list.
+ */
 @Component({
     selector: 'app-employees-table',
     templateUrl: './employees-table.component.html',
@@ -12,13 +15,34 @@ import { Employee } from 'src/app/models';
 })
 export class EmployeesTableComponent implements OnInit, OnChanges {
 
+    /**
+     * List of the employees to display in the table.
+     */
     @Input() employees: Employee[];
+
+    /**
+     * Flag which indicates if the view has been loaded.
+     */
     @Input() loaded: boolean = false;
 
+    /**
+     * Event emitter triggered when user wants to delete an employee.
+     */
     @Output() onDelete: EventEmitter<Employee> = new EventEmitter<Employee>();
+
+    /**
+     * Event emitter triggered when user wants to update an employee.
+     */
     @Output() onUpdate: EventEmitter<Employee> = new EventEmitter<Employee>();
 
+    /**
+     * The employees actually rendered in the table, taking in account the filters.
+     */
     data: Employee[] = [];
+
+    /**
+     * Filters' model object.
+     */
     filters: {
         name: string,
         active: number
@@ -26,8 +50,20 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
             name: '',
             active: 2
         }
+
+    /**
+     * Columns to display.
+     */
     displayedColumns: string[] = ['name', 'clockIn', 'clockOut', 'active', 'actions'];
+
+    /**
+     * Datasource object for the table.
+     */
     dataSource: EmployeesTableDataSource;
+
+    /**
+     * Database which contains the records to display and that is passed to the datasource.
+     */
     private dataBase: EmployeesTableDatabase;
 
     constructor(public translate: TranslateService) { }
@@ -42,22 +78,35 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
         }
     }
 
+    /**
+     * Renders the table component.
+     * @param data The collection of employees to display.
+     */
     renderTable(data: Employee[]) {
         this.data = data;
         this.dataBase = new EmployeesTableDatabase(data);
         this.dataSource = new EmployeesTableDataSource(this.dataBase);
     }
 
+    /**
+     * Applies the name filter.
+     */
     applyFilterName(): void {
         const data = this.selectData();
         this.renderTable(data);
     }
 
+    /**
+     * Applies the active filter.
+     */
     applyFilterActive(): void {
         const data = this.selectData();
         this.renderTable(data);
     }
 
+    /**
+     * Filters the source data by the parameters inserted in the view.
+     */
     private selectData(): any[] {
         const data: any[] = this.employees && this.employees.length ? this.employees.slice() : [];
         const filteredData = data

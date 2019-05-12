@@ -4,19 +4,29 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 
 import { DateTimePipe } from './date-time.pipe';
 
+/**
+ * Handles datetimes in order to display in a more human friendly format (at least, the more recent datetimes).
+ */
 @Component({
   selector: 'date-time',
   templateUrl: './date-time.component.html',
   styleUrls: ['./date-time.component.scss'],
 })
 export class DateTimeComponent implements OnInit, OnChanges {
+
+  /**
+   * The source datetime in ISO format.
+   */
   @Input() dateTimeISO: string;
 
+  /**
+   * Flag which indicates if the datetime is recent or not.
+   */
   recent: boolean;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.dateTimeISO) {
@@ -24,6 +34,10 @@ export class DateTimeComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Says if a datetime is recent or not. It's recent if the datetime value
+   * is a today datetime, a tomorrow or a yesterday one.
+   */
   isRecently(): boolean {
     const today: boolean = moment.utc(this.dateTimeISO).format('L') === moment.utc().format('L');
     const yesterday: boolean =

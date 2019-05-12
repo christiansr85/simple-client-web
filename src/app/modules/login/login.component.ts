@@ -17,16 +17,29 @@ import { AuthenticationService } from 'src/app/services';
 })
 export class LoginComponent implements OnInit {
 
+    /**
+     * The login's form.
+     */
     loginForm: FormGroup;
+
+    /**
+     * Flag to indicate if user has tried to submit the data yet.
+     */
     submitted = false;
 
-    login: {
-        email?: string,
-        password?: string
-    } = {};
-
+    /**
+     * Stores any possible error happened while trying to connect to server.
+     */
     error = '';
+
+    /**
+     * The url we want to return after login.
+     */
     returnUrl: string;
+
+    /**
+     * Default language for login.
+     */
     activeLang = 'en-US';
 
     constructor(

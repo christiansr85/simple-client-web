@@ -3,7 +3,9 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 
 import { AuthenticationService } from '../services';
 
-
+/**
+ * Handles the navigation between views in order to check if the user is logged and if its token is still valid.
+ */
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(

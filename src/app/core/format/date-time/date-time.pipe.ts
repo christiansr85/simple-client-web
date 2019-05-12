@@ -2,6 +2,9 @@ import * as moment from 'moment';
 
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Formatter pipe for datetimes used along the @see DateTimeComponent .
+ */
 @Pipe({
   name: 'datetimeformat',
 })

@@ -7,12 +7,18 @@ import { map, merge } from 'rxjs/operators';
 
 import { EmployeesTableDatabase } from './employees-table.database';
 
+/**
+ * Contains an instance of the database to represent in the table and handles it. Here we could sort the 
+ * data, for instance.
+ */
 export class EmployeesTableDataSource extends DataSource<any> {
     constructor(private database: EmployeesTableDatabase, private sort?: MatSort) {
         super();
     }
 
-    /** Connect function called by the table to retrieve one stream containing the data to render. */
+    /** 
+     * Connect function called by the table to retrieve one stream containing the data to render. 
+     */
     connect(): Observable<any[]> {
         const displayDataChanges: any[] = [
             this.database.dataChange
@@ -26,6 +32,10 @@ export class EmployeesTableDataSource extends DataSource<any> {
         }));
     }
 
+    /**
+     * If sorting is enabled, then here we can sort the data.
+     * @param data The records to display in the view.
+     */
     getSortedData(data: any[]): any[] {
         if (!this.sort || !this.sort.active || this.sort.direction === '') {
             return data;

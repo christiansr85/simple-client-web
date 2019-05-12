@@ -8,6 +8,9 @@ import { Observable, Subscription } from 'rxjs';
 import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
 
+/**
+ * View container for single employee view.
+ */
 @Component({
     selector: 'app-employee',
     templateUrl: './employee.component.html',
@@ -15,11 +18,29 @@ import { EmployeesService } from 'src/app/services';
 })
 export class EmployeeComponent implements OnDestroy {
 
+    /**
+     * Stores the employee object represented in the view, if any.
+     */
     employee: Employee = {};
+
+    /**
+     * Flag which indicates if the view has been already loaded.
+     */
     loaded: boolean = false;
+
+    /**
+     * Handles when a non existing user is requested.
+     */
     userNotFound: boolean = false;
 
+    /**
+     * Form represented in the view.
+     */
     private employeeForm: FormGroup;
+
+    /**
+     * Handles teh view's subscriptions.
+     */
     private subscriptions: Subscription = new Subscription();
 
     constructor(
@@ -54,14 +75,24 @@ export class EmployeeComponent implements OnDestroy {
         this.subscriptions.unsubscribe();
     }
 
+    /**
+     * Goes to the previous location in navigator history.
+     */
     onCancel(): void {
         this.location.back();
     }
 
+    /**
+     * Executed every time the employee's form is changed.
+     * @param form The form which has been changed.
+     */
     onFormChange(form: FormGroup): void {
         this.employeeForm = form;
     }
 
+    /**
+     * Creates an employee object from the view's form and saves/updates it.
+     */
     store(): void {
         if (this.employeeForm) {
             this.employee.name = this.employeeForm.controls.name.value;
@@ -81,14 +112,26 @@ export class EmployeeComponent implements OnDestroy {
         }
     }
 
+    /**
+     * Calls to create a new employee.
+     * @param employee The employee to save.
+     */
     create(employee: Employee): Observable<any> {
         return this.employeesService.create(employee);
     }
 
+    /**
+     * Calls to update an existing employee.
+     * @param employee The employee to update.
+     */
     update(employee: Employee): Observable<any> {
         return this.employeesService.update(employee, employee.userId);
     }
 
+    /**
+     * Opens a sanckbar object to indicate an action.
+     * @param message The message to display in the snackbar.
+     */
     openSnackBar(message: string): void {
         this.snackBar.open(message, null, {
             duration: 3000
