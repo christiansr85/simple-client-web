@@ -14,6 +14,8 @@ import { FormGroup } from '@angular/forms';
 export class EmployeeComponent implements OnDestroy {
 
     employee: Employee = {};
+    loaded: boolean = false;
+    userNotFound: boolean = false;
 
     private employeeForm: FormGroup;
     private subscriptions: Subscription = new Subscription();
@@ -24,14 +26,23 @@ export class EmployeeComponent implements OnDestroy {
         private location: Location,
         private employeesService: EmployeesService
     ) {
+        this.userNotFound = false;
         const id = this.route.snapshot.params['id'];
         if (id) {
             this.subscriptions.add(
                 this.employeesService.get(id)
-                    .subscribe(emp => {
-                        this.employee = emp;
-                    })
+                    .subscribe(
+                        emp => {
+                            if (emp) {
+                                this.employee = emp;
+                            } else {
+                                this.userNotFound = true;
+                            }
+                            this.loaded = true;
+                        })
             );
+        } else {
+            this.loaded = true;
         }
     }
 

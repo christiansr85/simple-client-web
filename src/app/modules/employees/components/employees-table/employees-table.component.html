@@ -1,8 +1,10 @@
 <div fxFlex fxLayout="column">
     <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
         <mat-form-field>
-            <input matInput [(ngModel)]="filters.name" (keyup)="applyFilterName($event.target.value)"
+            <input #filterInput matInput [(ngModel)]="filters.name" (keyup)="applyFilterName($event.target.value)"
                 placeholder="{{ 'employees.filters.name' | translate }}">
+            <mat-icon matSuffix *ngIf="filterInput.value" class="employees-table__filter-clear"
+                (click)="filters.name = ''; applyFilterName()">close</mat-icon>
         </mat-form-field>
 
         <mat-radio-group class="employees-table__radio-group" [(ngModel)]="filters.active"
@@ -19,8 +21,7 @@
         </mat-radio-group>
     </div>
 
-
-    <mat-table fxFlex #tableEmployees [dataSource]="dataSource" class="list-nohover">
+    <mat-table fxFlex #tableEmployees [dataSource]="dataSource" class="list-nohover" *ngIf="data && data.length">
 
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef padding-right-16>
@@ -60,10 +61,11 @@
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef fxFlex="70px" padding-right-16>
+            <mat-header-cell *matHeaderCellDef fxFlex="70px" margin-right-16>
                 {{ 'employees.table.columns.actions' | translate }}
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="70px" padding-right-16>
+            <mat-cell *matCellDef="let element" class="flex-parent" fxFlex="70px" fxLayoutAlign="start center"
+                margin-right-16>
                 <button mat-icon-button (click)="onUpdate.emit(element)">
                     <mat-icon matTooltip="{{ 'employees.actions.edit' | translate }}">create</mat-icon>
                 </button>
@@ -78,4 +80,9 @@
         <mat-row fxLayout="row" class="employees-list-row" *matRowDef="let row; columns: displayedColumns;"
             margin-bottom-8></mat-row>
     </mat-table>
+
+    <div class="employees-table__no-data" *ngIf="!data || !data.length" fxFlex fxLayoutAlign="center center"
+        margin-top-16>
+        <span>{{ 'employees.no_data' | translate }}</span>
+    </div>
 </div>

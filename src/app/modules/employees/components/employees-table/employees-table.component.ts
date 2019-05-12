@@ -18,6 +18,7 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
     @Output() onDelete: EventEmitter<Employee> = new EventEmitter<Employee>();
     @Output() onUpdate: EventEmitter<Employee> = new EventEmitter<Employee>();
 
+    data: Employee[] = [];
     filters: {
         name: string,
         active: number
@@ -42,6 +43,7 @@ export class EmployeesTableComponent implements OnInit, OnChanges {
     }
 
     renderTable(data: Employee[]) {
+        this.data = data;
         this.dataBase = new EmployeesTableDatabase(data);
         this.dataSource = new EmployeesTableDataSource(this.dataBase);
     }

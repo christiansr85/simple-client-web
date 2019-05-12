@@ -1,5 +1,11 @@
-<mat-card fxLayout="column">
-    <mat-card-title>
+<mat-card fxLayout="column" *ngIf="!userNotFound">
+    <mat-card-title margin-bottom-16>
+        <span *ngIf="loaded && employee.userId">
+            {{ 'employees.detail.title_edit' | translate }} <strong> {{ employee.name }} </strong>
+        </span>
+        <span *ngIf="loaded && !employee.userId">
+            {{ 'employees.detail.title_create' | translate }}
+        </span>
     </mat-card-title>
     <mat-card-content fxFlex fxLayout="column">
         <app-employees-detail [employee]="employee" (onFormChange)="onFormChange($event)"></app-employees-detail>
@@ -10,6 +16,17 @@
         </button>
         <button mat-raised-button color="primary" (click)="store();" [disabled]="!employeeForm || !employeeForm.valid">
             <span>{{ 'employees.detail.accept' | translate }}</span>
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card fxFlex fxLayout="column" *ngIf="userNotFound">
+    <mat-card-content fxFlex fxLayout="column" fxLayoutAlign="center center">
+        <span>{{ 'employees.detail.user_not_found' | translate }}</span>
+    </mat-card-content>
+    <mat-card-actions fxFlex fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
+        <button mat-button color="primary" (click)="onCancel();">
+            <span>{{ 'employees.detail.cancel' | translate }}</span>
         </button>
     </mat-card-actions>
 </mat-card>

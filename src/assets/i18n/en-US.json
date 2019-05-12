@@ -27,6 +27,7 @@
                 "actions": "Actions"
             }
         },
+        "no_data": "No results",
         "filters": {
             "name": "Filter by name",
             "active": "Active",
@@ -45,7 +46,10 @@
             "clockIn": "Clock in",
             "clockOut": "Clock out",
             "cancel": "Cancel",
-            "accept": "Save"
+            "accept": "Save",
+            "title_edit": "Edit employee ",
+            "title_create": "Create new employee",
+            "user_not_found": "The requested user does not exist"
         },
         "delete_confirm": "Are you sure you want to delete this employee?" 
     },

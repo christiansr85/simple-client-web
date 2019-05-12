@@ -32,7 +32,7 @@ export const rootRoutes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/app',
+        redirectTo: '/app/employees',
         pathMatch: 'full'
     },
 ];

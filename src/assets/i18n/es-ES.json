@@ -27,6 +27,7 @@
                 "actions": "Acciones"
             }
         },
+        "no_data": "Sin resultados",
         "filters": {
             "name": "Filtrar por nombre",
             "active": "Activos",
@@ -45,7 +46,10 @@
             "clockIn": "Hora de entrada",
             "clockOut": "Hora de salida",
             "cancel": "Cancelar",
-            "accept": "Guardar"
+            "accept": "Guardar",
+            "title_edit": "Editar empleado ",
+            "title_create": "Crear nuevo empleado",
+            "user_not_found": "El usuario solicitado no existe"
         },
         "delete_confirm": "¿Está seguro de que desea eliminar este empleado?"
     },
