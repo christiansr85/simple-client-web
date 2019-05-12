@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Employee } from 'src/app/models';
-import { EmployeesService } from 'src/app/services';
-import { MatDialog } from '@angular/material';
-import { ConfirmDialog } from 'src/app/components';
 import { Store } from '@ngrx/store';
-import * as EmployeeReducers from '../../store/employee.reducers';
-import * as EmployeeActions from '../../store/employee.actions';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
+import { ConfirmDialog } from 'src/app/components';
+import { Employee } from 'src/app/models';
+
+import * as EmployeeActions from '../../store/employee.actions';
+import * as EmployeeReducers from '../../store/employee.reducers';
 
 @Component({
     selector: 'app-employees',
@@ -27,7 +27,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
         public translate: TranslateService,
         private storeEmployee: Store<EmployeeReducers.EmployeeState>,
         private dialog: MatDialog,
-        private employeesService: EmployeesService,
+        private snackBar: MatSnackBar,
         private router: Router
     ) {
         this.employees$ = this.storeEmployee.select(EmployeeReducers.getAll);
@@ -61,6 +61,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe(result => {
             if (result && JSON.parse(result) === true) {
                 this.storeEmployee.dispatch(new EmployeeActions.EmployeeDeleteAction(employee.userId));
+                this.openSnackBar(this.translate.instant('employees.employee_deleted'));
             }
         });
     }
@@ -71,5 +72,11 @@ export class EmployeesComponent implements OnInit, OnDestroy {
 
     onAdd(): void {
         this.router.navigate(['app', 'employee']);
+    }
+
+    openSnackBar(message: string): void {
+        this.snackBar.open(message, null, {
+            duration: 3000
+        });
     }
 }

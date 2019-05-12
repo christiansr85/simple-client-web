@@ -1,10 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subscription } from 'rxjs';
 import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
-import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-employee',
@@ -24,7 +26,9 @@ export class EmployeeComponent implements OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private location: Location,
-        private employeesService: EmployeesService
+        private snackBar: MatSnackBar,
+        private employeesService: EmployeesService,
+        private translate: TranslateService
     ) {
         this.userNotFound = false;
         const id = this.route.snapshot.params['id'];
@@ -67,6 +71,11 @@ export class EmployeeComponent implements OnDestroy {
 
             const action = this.employee.userId ? this.update(this.employee) : this.create(this.employee);
             action.subscribe(() => {
+                let messageKey: string = 'employees.employee_updated';
+                if (!this.employee.userId) {
+                    messageKey = 'employees.employee_created';
+                }
+                this.openSnackBar(this.translate.instant(messageKey));
                 this.router.navigate(['app', 'employees']);
             });
         }
@@ -78,5 +87,11 @@ export class EmployeeComponent implements OnDestroy {
 
     update(employee: Employee): Observable<any> {
         return this.employeesService.update(employee, employee.userId);
+    }
+
+    openSnackBar(message: string): void {
+        this.snackBar.open(message, null, {
+            duration: 3000
+        });
     }
 }

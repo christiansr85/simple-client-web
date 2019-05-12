@@ -51,7 +51,10 @@
             "title_create": "Create new employee",
             "user_not_found": "The requested user does not exist"
         },
-        "delete_confirm": "Are you sure you want to delete this employee?" 
+        "delete_confirm": "Are you sure you want to delete this employee?" ,
+        "employee_deleted": "Employee deleted successfully",
+        "employee_updated": "Employee updated successfully",
+        "employee_created": "Employee created successfully"
     },
     "user": {
         "menu": {

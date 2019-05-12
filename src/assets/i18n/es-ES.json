@@ -51,7 +51,10 @@
             "title_create": "Crear nuevo empleado",
             "user_not_found": "El usuario solicitado no existe"
         },
-        "delete_confirm": "¿Está seguro de que desea eliminar este empleado?"
+        "delete_confirm": "¿Está seguro de que desea eliminar este empleado?",
+        "employee_deleted": "Empleado eliminado con éxito",
+        "employee_updated": "Empleado actualizado con éxito",
+        "employee_created": "Empleado creado con éxito"
     },
     "user": {
         "menu": {
