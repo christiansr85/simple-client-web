@@ -19,4 +19,8 @@ export class WrapperViewComponent {
       this.authenticationService.logout();
       this.router.navigate(['/login']);
     }
+
+    goToPreferences(): void {
+      this.router.navigate(['app', 'user']);
+    }
 }

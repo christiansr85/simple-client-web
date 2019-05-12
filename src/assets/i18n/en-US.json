@@ -58,7 +58,19 @@
     },
     "user": {
         "menu": {
-            "logout": "Logout"
+            "logout": "Logout",
+            "settings": "Settings"
+        },
+        "settings": {
+            "cancel": "Back",
+            "apply": "Apply",
+            "title": "Settings",
+            "provider_java": "JAVA",
+            "provider_php": "PHP",
+            "lang_es": "Español",
+            "lang_en": "English",
+            "language": "Language",
+            "provider": "Data provider"
         }
     },
     "dialog": {

@@ -1,0 +1,18 @@
+.user {
+    &__radio-group {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    &__radio-button {
+      margin: 5px;
+    }
+  
+    &__no-data {
+      text-transform: uppercase;
+    }
+  
+    &__filter-clear {
+      cursor: pointer;
+    }
+  }

@@ -7,17 +7,17 @@ import { Employee } from '../models';
 @Injectable()
 export class EmployeesService {
 
-    private source: string;
+    source: string;
 
-    private readonly javaBaseUrl: string = '/api/java';
-    private readonly phpBaseUrl: string = '/api/php';
+    static readonly JAVA: string = '/api/java';
+    static readonly PHP: string = '/api/php';
 
     constructor(private httpClient: HttpClient) {
         this.setSource();
     }
 
-    setSource(): void {
-        this.source = this.javaBaseUrl;
+    setSource(source?: string): void {
+        this.source = source || EmployeesService.JAVA;
     }
 
     get(userId: number) {

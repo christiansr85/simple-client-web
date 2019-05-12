@@ -1,7 +1,7 @@
+$size: 48px;
+
 .wrapper-view {
     height: 100%;
-    &__toolbar {
-    }
 
     &__body {
         height: 100%;
@@ -14,5 +14,15 @@
         max-width: 1000px;
         padding: 16px;
         margin: 0 auto;
+    }
+
+    &__user-icon-container {
+        height: $size;
+        width: $size;
+    }
+    &__user-icon {
+        cursor: pointer;
+
+        font-size: $size;
     }
 }

@@ -16,7 +16,7 @@ import { ErrorInterceptor, JwtInterceptor } from './helpers';
 import { effects, metaReducers, reducerProvider, reducerToken } from './modules/employees/store';
 import { LoginModule } from './modules/login/login.module';
 import { WrapperViewModule } from './modules/wrapper-view/wrapper-view.module';
-import { AuthenticationService, EmployeesService } from './services';
+import { AuthenticationService, EmployeesService, UserSettingsService } from './services';
 
 const MODULES = [
   BrowserModule,
@@ -63,7 +63,8 @@ const importModules = !environment.production ? [MODULES, ...devModules] : MODUL
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     reducerProvider,
     AuthenticationService,
-    EmployeesService
+    EmployeesService,
+    UserSettingsService
   ],
   entryComponents: [
     ConfirmDialog
@@ -73,9 +74,11 @@ const importModules = !environment.production ? [MODULES, ...devModules] : MODUL
   ]
 })
 export class AppModule {
-  activeLang = 'es-ES';
-  constructor(public translate: TranslateService) {
+  constructor(
+    private settingsService: UserSettingsService,
+    private translate: TranslateService
+  ) {
     this.translate.addLangs(['en-US', 'es-ES']);
-    this.translate.setDefaultLang(this.activeLang);
+    this.settingsService.applySettings();
   }
 }

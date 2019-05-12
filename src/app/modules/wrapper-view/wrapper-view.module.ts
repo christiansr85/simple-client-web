@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core';
 
 import { EmployeesModule } from '../employees/employees.module';
+import { UserModule } from '../user/user.module';
 import { WrapperViewRoutingModule } from './wrapper-view-routing.module';
 import { WrapperViewComponent } from './wrapper-view.component';
 
@@ -12,7 +13,8 @@ import { WrapperViewComponent } from './wrapper-view.component';
         FormsModule,
         CoreModule,
         WrapperViewRoutingModule,
-        EmployeesModule
+        EmployeesModule,
+        UserModule 
     ],
     declarations: [
         WrapperViewComponent

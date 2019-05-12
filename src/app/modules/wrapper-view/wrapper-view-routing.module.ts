@@ -4,6 +4,7 @@ import { AuthGuard } from 'src/app/guards';
 
 import { EmployeesComponent, EmployeeComponent } from '../employees/components';
 import { WrapperViewComponent } from './wrapper-view.component';
+import { UserComponent } from '../user/components';
 
 export const rootRoutes: Routes = [
     {
@@ -27,6 +28,10 @@ export const rootRoutes: Routes = [
             {
                 path: 'employee/:id',
                 component: EmployeeComponent
+            },
+            {
+                path: 'user',
+                component: UserComponent
             }
         ]
     },

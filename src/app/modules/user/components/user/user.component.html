@@ -1,0 +1,39 @@
+<mat-card fxFlex fxLayout="column" fxLayoutGap="16px">
+    <mat-card-title>
+        <span>{{ 'user.settings.title' | translate }}</span>
+    </mat-card-title>
+    <mat-card-content fxFlex fxLayout="column" fxLayoutGap="16px">
+        <div fxFlex fxLayout="column" fxLayoutGap="8px">
+            <span>{{ 'user.settings.provider' | translate }}</span>
+            <mat-radio-group class="user__radio-group" [(ngModel)]="settings.provider" (change)="dirty = true;">
+                <mat-radio-button class="user__radio-button" [value]="'/api/java'">
+                    {{ 'user.settings.provider_java' | translate }}
+                </mat-radio-button>
+                <mat-radio-button class="user__radio-button" [value]="'/api/php'">
+                    {{ 'user.settings.provider_php' | translate }}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div fxFlex fxLayout="column" fxLayoutGap="8px">
+            <span>{{ 'user.settings.language' | translate }}</span>
+            <mat-radio-group class="user__radio-group" [(ngModel)]="settings.language" (change)="dirty = true;">
+                <mat-radio-button class="user__radio-button" [value]="'es-ES'">
+                    {{ 'user.settings.lang_es' | translate }}
+                </mat-radio-button>
+                <mat-radio-button class="user__radio-button" [value]="'en-US'">
+                    {{ 'user.settings.lang_en' | translate }}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+    </mat-card-content>
+    <mat-card-actions fxFlex fxLayoutAlign="end center" fxLayoutGap="16px">
+        <button mat-button color="primary" (click)="goBack();">
+            <span>{{ 'user.settings.cancel' | translate }}</span>
+        </button>
+        <button mat-raised-button color="primary" (click)="apply();" [disabled]="!dirty">
+            <span>{{ 'user.settings.apply' | translate }}</span>
+        </button>
+    </mat-card-actions>
+</mat-card>
