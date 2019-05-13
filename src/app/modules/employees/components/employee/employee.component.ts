@@ -2,9 +2,10 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
+import { filter, pairwise } from 'rxjs/operators';
 import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
 
@@ -39,9 +40,14 @@ export class EmployeeComponent implements OnDestroy {
     private employeeForm: FormGroup;
 
     /**
-     * Handles teh view's subscriptions.
+     * Handles the view's subscriptions.
      */
     private subscriptions: Subscription = new Subscription();
+
+    /**
+     * If previous url is the login page, then we try to avoid to go back to it.
+     */
+    private previousUrlIsLogin: boolean = true;
 
     constructor(
         private route: ActivatedRoute,
@@ -79,7 +85,11 @@ export class EmployeeComponent implements OnDestroy {
      * Goes to the previous location in navigator history.
      */
     onCancel(): void {
-        this.location.back();
+        if (this.previousUrlIsLogin) {
+            this.router.navigate(['app', 'employees']);
+        } else {
+            this.location.back();
+        }
     }
 
     /**
