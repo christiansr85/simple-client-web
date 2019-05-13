@@ -1,11 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, pairwise } from 'rxjs/operators';
 import { Employee } from 'src/app/models';
 import { EmployeesService } from 'src/app/services';
 
@@ -17,7 +16,7 @@ import { EmployeesService } from 'src/app/services';
     templateUrl: './employee.component.html',
     styleUrls: ['./employee.component.scss']
 })
-export class EmployeeComponent implements OnDestroy {
+export class EmployeeComponent implements OnInit {
 
     /**
      * Stores the employee object represented in the view, if any.
@@ -77,8 +76,8 @@ export class EmployeeComponent implements OnDestroy {
         }
     }
 
-    ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
+    ngOnInit(): void {
+        this.previousUrlIsLogin = this.route.snapshot.queryParams['loggedIn'];
     }
 
     /**

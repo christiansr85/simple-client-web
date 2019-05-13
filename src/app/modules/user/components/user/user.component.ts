@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
-import { Router, RoutesRecognized } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, RoutesRecognized, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/internal/operators/filter';
 import { pairwise } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnDestroy {
+export class UserComponent implements OnInit {
 
     /**
      * Local setings model object.
@@ -38,10 +38,9 @@ export class UserComponent implements OnDestroy {
      */
     private previousUrlIsLogin: boolean = true;
 
-    private subscription: Subscription = new Subscription();
-
     constructor(
         private location: Location,
+        private route: ActivatedRoute,
         private router: Router,
         private userSettingsSService: UserSettingsService,
         public translate: TranslateService
@@ -50,8 +49,8 @@ export class UserComponent implements OnDestroy {
         this.settings.language = this.userSettingsSService.getLanguage();
     }
 
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+    ngOnInit(): void {
+        this.previousUrlIsLogin = this.route.snapshot.queryParams['loggedIn'];
     }
 
     /**

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { User } from '../models';
-import { AuthenticationService } from './authentication.service';
 import { EmployeesService } from './employees.service';
 
 /**
@@ -26,15 +25,17 @@ export class UserSettingsService {
 
     constructor(
         private employeesService: EmployeesService,
-        private authService: AuthenticationService,
         private translate: TranslateService
     ) {
-        this.user = this.authService.currentUserValue;
-        const settingsStored = localStorage.getItem('settings_' + this.user.id);
-        if (settingsStored) {
-            const settings = JSON.parse(settingsStored);
-            this.settings = settings;
-            this.applySettings();
+        const userStored = localStorage.getItem('currentUser');
+        if (userStored) {
+            this.user = JSON.parse(userStored);
+            const settingsStored = localStorage.getItem('settings_' + this.user.id);
+            if (settingsStored) {
+                const settings = JSON.parse(settingsStored);
+                this.settings = settings;
+                this.applySettings();
+            }
         }
     }
 
