@@ -1,5 +1,5 @@
 # Web Application
-Web application for the Starhsot test.
+Web application for simple test.
 
 ## Requirements
 - node 10.15.3
